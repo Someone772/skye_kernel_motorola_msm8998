@@ -92,9 +92,6 @@ choice
 
 	config DEFAULT_DEADLINE
 		bool "Deadline" if IOSCHED_DEADLINE=y
-	
-	config DEFAULT_SSG
-		bool "SSG" if MQ_IOSCHED_SSG=y
 
 	config DEFAULT_CFQ
 		bool "CFQ" if IOSCHED_CFQ=y
@@ -116,7 +113,6 @@ endchoice
 
 config DEFAULT_IOSCHED
 	string
-	default "ssg" if DEFAULT_SSG
 	default "deadline" if DEFAULT_DEADLINE
 	default "cfq" if DEFAULT_CFQ
 	default "bfq" if DEFAULT_BFQ
