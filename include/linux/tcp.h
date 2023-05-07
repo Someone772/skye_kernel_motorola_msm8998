@@ -353,6 +353,10 @@ struct tcp_sock {
 	 */
 	struct request_sock *fastopen_rsk;
 	u32	*saved_syn;
+
+/* Rerouting information */
+	u16	ecn_rehash;	/* PLB triggered rehash attempts */
+
 };
 
 enum tsq_flags {

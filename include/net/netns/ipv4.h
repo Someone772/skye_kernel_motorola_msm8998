@@ -79,6 +79,11 @@ struct netns_ipv4 {
 	struct local_ports ip_local_ports;
 
 	int sysctl_tcp_ecn;
+	int sysctl_tcp_plb_enabled;
+	int sysctl_tcp_plb_cong_thresh;
+	int sysctl_tcp_plb_idle_rehash_rounds;
+	int sysctl_tcp_plb_rehash_rounds;
+	int sysctl_tcp_plb_suspend_rto_sec;
 	int sysctl_tcp_ecn_fallback;
 
 	int sysctl_ip_no_pmtu_disc;

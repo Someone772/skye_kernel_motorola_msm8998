@@ -1828,6 +1828,23 @@ extern int tcp_rack_mark_lost(struct sock *sk);
 extern void tcp_rack_advance(struct tcp_sock *tp,
 			     const struct skb_mstamp *xmit_time, u8 sacked);
 
+/* tcp_plb.c */
+
+#define TCP_PLB_SCALE 8	/* scaling factor for fractions in PLB (e.g. ce_ratio) */
+
+/* State for PLB (Protective Load Balancing) for a single TCP connection. */
+struct tcp_plb_state {
+	u8	consec_cong_rounds:5, /* consecutive congested rounds */
+		enabled:1,	/* Check if PLB is enabled */
+		unused:2;
+	u32	pause_until; /* jiffies32 when PLB can resume repathing */
+};
+
+void tcp_plb_update_state(const struct sock *sk, struct tcp_plb_state *plb,
+			  const int cong_ratio);
+void tcp_plb_check_rehash(struct sock *sk, struct tcp_plb_state *plb);
+void tcp_plb_update_state_upon_rto(struct sock *sk, struct tcp_plb_state *plb);
+
 /*
  * Save and compile IPv4 options, return a pointer to it
  */
