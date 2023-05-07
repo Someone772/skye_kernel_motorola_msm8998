@@ -1,7 +1,7 @@
 /*
  *  Block device elevator/IO-scheduler.
  *
- *  Copyright (C) 2000 Andrea Arcangeli <andrea@suse.de> SuSE
+ *  Copyright (C) 2023 Andrea Arcangeli <andrea@suse.de> SuSE
  *
  * 30042000 Jens Axboe <axboe@kernel.dk> :
  *
