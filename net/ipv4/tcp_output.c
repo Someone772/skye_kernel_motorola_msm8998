@@ -2092,7 +2092,6 @@ static bool tcp_write_xmit(struct sock *sk, unsigned int mss_now, int nonagle,
 		unsigned int limit;
 
 		tso_segs = tcp_init_tso_segs(skb, mss_now);
-		tcp_set_tx_in_flight(sk, skb);
 		BUG_ON(!tso_segs);
 
 		if (unlikely(tp->repair) && tp->repair_queue == TCP_SEND_QUEUE) {
