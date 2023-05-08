@@ -895,8 +895,6 @@ struct tcp_congestion_ops {
 	void (*in_ack_event)(struct sock *sk, u32 flags);
 	/* new value of cwnd after loss (optional) */
 	u32  (*undo_cwnd)(struct sock *sk);
-	/* react to a specific lost skb (optional) */
-	void (*skb_marked_lost)(struct sock *sk, const struct sk_buff *skb);
 	/* hook for packet ack accounting (optional) */
 	void (*pkts_acked)(struct sock *sk, u32 num_acked, s32 rtt_us);
 	/* get info for inet_diag (optional) */

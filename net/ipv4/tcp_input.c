@@ -907,19 +907,6 @@ static void tcp_verify_retransmit_hint(struct tcp_sock *tp, struct sk_buff *skb)
 		tp->retransmit_high = TCP_SKB_CB(skb)->end_seq;
 }
 
-/* Sum the number of packets on the wire we have marked as lost, and
- * notify the congestion control module that the given skb was marked lost.
- */
-static void tcp_notify_skb_loss_event(struct tcp_sock *tp, const struct sk_buff *skb)
-{
-	struct sock *sk = (struct sock *)tp;
-	const struct tcp_congestion_ops *ca_ops = inet_csk(sk)->icsk_ca_ops;
-
-	tp->lost += tcp_skb_pcount(skb);
-	if (ca_ops->skb_marked_lost)
-		ca_ops->skb_marked_lost(sk, skb);
-}
-
 static void tcp_skb_mark_lost(struct tcp_sock *tp, struct sk_buff *skb)
 {
 	if (!(TCP_SKB_CB(skb)->sacked & (TCPCB_LOST|TCPCB_SACKED_ACKED))) {
