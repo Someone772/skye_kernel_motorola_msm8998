@@ -131,6 +131,15 @@ config CPU_FREQ_DEFAULT_GOV_SCHEDUTIL
 	  have a look at the help section of that governor. The fallback
 	  governor will be 'performance'.
 
+config CPU_FREQ_DEFAULT_GOV_ELECTROACTIVE
+	bool "electroactive"
+	select CPU_FREQ_GOV_ELECTROACTIVE
+	help
+	  Use the CPUFreq governor 'electroactive' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'electroactive' governor for latency-sensitive workloads.
+
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -225,6 +234,15 @@ config CPU_FREQ_GOV_CONSERVATIVE
 	  For details, take a look at linux/Documentation/cpu-freq.
 
 	  If in doubt, say N.
+
+config CPU_FREQ_GOV_ELECTROACTIVE
+	tristate "'electroactive' cpufreq policy governor"
+	help
+	  'electroactive' - A tweaked "hybrid" based smart and smooth optimized
+            governor designed for optimization in transition and a balance between
+            performance and power.
+
+	   If in doubt, say N.
 
 config CPU_BOOST
 	tristate "Event base short term CPU freq boost"
