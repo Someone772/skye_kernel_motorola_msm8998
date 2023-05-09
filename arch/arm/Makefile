@@ -79,6 +79,18 @@ arch-$(CONFIG_CPU_32v4T)	=-D__LINUX_ARM_ARCH__=4 -march=armv4t
 arch-$(CONFIG_CPU_32v4)		=-D__LINUX_ARM_ARCH__=4 -march=armv4
 arch-$(CONFIG_CPU_32v3)		=-D__LINUX_ARM_ARCH__=3 -march=armv3
 
+# Since 'cortex-a15' is a superset of the 'armv7-a' arch spec, we need to
+# explicitly redefine the arch options to not include '-march=armv7-a' when
+# generating code for Krait, which is compatible with the instruction set of the
+# Cortex-A15, because GCC will warn us about ambiguous ISA restrictions caused
+# by seemingly conflicting -march and -mcpu options.
+# If $(CC) does not support the -mcpu=cortex-a15 option, fall back on passing
+# -march=armv7-a to specify the ISA restriction, though this is suboptimal. To
+# keep things simpler, we don't bother with a fallback option if the compiler
+# doesn't even support -march=armv7-a, since in that situation we would have
+# bigger problems.
+arch-$(CONFIG_ARCH_MSM8998)	=-D__LINUX_ARM_ARCH__=7 $(call cc-option,-mcpu=cortex-a53,-march=armv8-a)
+
 # Evaluate arch cc-option calls now
 arch-y := $(arch-y)
 
@@ -101,6 +113,7 @@ tune-$(CONFIG_CPU_XSC3)		=-mtune=xscale
 tune-$(CONFIG_CPU_FEROCEON)	=-mtune=xscale
 tune-$(CONFIG_CPU_V6)		=-mtune=arm1136j-s
 tune-$(CONFIG_CPU_V6K)		=-mtune=arm1136j-s
+tune-$(CONFIG_ARCH_MSM8998)	=-mtune=cortex-a53
 
 # Evaluate tune cc-option calls now
 tune-y := $(tune-y)
@@ -288,6 +301,7 @@ core-y				+= arch/arm/net/
 core-y				+= arch/arm/crypto/
 core-y				+= arch/arm/firmware/
 core-y				+= $(machdirs) $(platdirs)
+core-y				+= arch/arm/hotplug/
 
 drivers-$(CONFIG_OPROFILE)      += arch/arm/oprofile/
 
