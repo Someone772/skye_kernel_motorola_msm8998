@@ -1135,7 +1135,7 @@ prepare: prepare0
 # KERNELRELEASE can change from a few different places, meaning version.h
 # needs to be updated, so this check is forced on all builds
 
-uts_len := 64
+uts_len := 128
 ifneq (,$(BUILD_NUMBER))
 	UTS_RELEASE=$(KERNELRELEASE)-ab$(BUILD_NUMBER)
 else
