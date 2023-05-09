@@ -1,4 +1,4 @@
-CONFIG_LOCALVERSION="- ⚙️🔥 𝔹𝕠𝕠𝕤𝕥𝕂𝕖𝕣𝕟𝕖𝕝+𝕂𝕖𝕣𝕟𝕖𝕝𝕊𝕌𝕧𝟘.7 📈 "
+CONFIG_LOCALVERSION="-𝔹𝕠𝕠𝕤𝕥𝕂𝕖𝕣𝕟𝕖𝕝𝕧𝟘.7"
 
 # Custom Lines
 CONFIG_KPROBES=y
