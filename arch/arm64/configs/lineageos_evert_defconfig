@@ -1,4 +1,4 @@
-CONFIG_LOCALVERSION="-𝔹𝕠𝕠𝕤𝕥𝕂𝕖𝕣𝕟𝕖𝕝𝕧𝟘.7"
+CONFIG_LOCALVERSION="-BoostKernelv0.7"
 
 # Custom Lines
 CONFIG_KPROBES=y
