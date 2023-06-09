@@ -11240,10 +11240,11 @@ static inline int find_new_ilb(int type)
 	return find_new_hmp_ilb(type);
 #endif
 
-	ilb = cpumask_first(nohz.idle_cpus_mask);
-
-	if (ilb < nr_cpu_ids && idle_cpu(ilb))
-		return ilb;
+	for_each_cpu_and(ilb, nohz.idle_cpus_mask,
+			      housekeeping_cpumask()) {
+		if (idle_cpu(ilb))
+			return ilb;
+	}
 
 	return nr_cpu_ids;
 }
