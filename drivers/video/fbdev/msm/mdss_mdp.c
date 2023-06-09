@@ -1,7 +1,7 @@
 /*
  * MDSS MDP Interface (used by framebuffer core)
  *
- * Copyright (c) 2007-2018, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2007-2023, The Linux Foundation. All rights reserved.
  * Copyright (C) 2007 Google Incorporated
  *
  * This software is licensed under the terms of the GNU General Public
@@ -61,7 +61,7 @@
 #include "mdss_mdp_trace.h"
 
 #define AXI_HALT_TIMEOUT_US	0x4000
-#define AUTOSUSPEND_TIMEOUT_MS	200
+#define AUTOSUSPEND_TIMEOUT_MS	50
 #define DEFAULT_MDP_PIPE_WIDTH	2048
 #define RES_1080p		(1088*1920)
 #define RES_UHD			(3840*2160)
