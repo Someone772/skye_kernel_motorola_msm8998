@@ -1,4 +1,4 @@
-/* Copyright (c) 2016-2023, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2016-2018, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1394,7 +1394,7 @@ static int fg_awake_cb(struct votable *votable, void *data, int awake,
 	struct fg_chip *chip = data;
 
 	if (awake)
-		pm_wakeup_event(chip->dev, 500);
+		pm_stay_awake(chip->dev);
 	else
 		pm_relax(chip->dev);
 
