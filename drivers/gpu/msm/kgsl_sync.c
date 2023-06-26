@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2023, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -156,6 +156,7 @@ int kgsl_add_fence_event(struct kgsl_device *device,
 	struct sync_pt *pt;
 	struct sync_fence *fence = NULL;
 	int ret = -EINVAL;
+	char fence_name[sizeof(fence->name)] = {};
 	unsigned int cur;
 
 	priv.fence_fd = -1;
@@ -177,8 +178,13 @@ int kgsl_add_fence_event(struct kgsl_device *device,
 		ret = -ENOMEM;
 		goto out;
 	}
+	snprintf(fence_name, sizeof(fence_name),
+		"%s-pid-%d-ctx-%d-ts-%u",
+		device->name, current->group_leader->pid,
+		context_id, timestamp);
 
-	fence = sync_fence_create("", pt);
+
+	fence = sync_fence_create(fence_name, pt);
 	if (fence == NULL) {
 		/* only destroy pt when not added to fence */
 		kgsl_sync_pt_destroy(pt);
