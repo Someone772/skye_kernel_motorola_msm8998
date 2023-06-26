@@ -1,4 +1,4 @@
-/* Copyright (c) 2013-2023, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2013-2017, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -302,7 +302,8 @@ static void msm_restart_prepare(const char *cmd)
 		pr_info("force system enter into ramdump for debug\n");
 	}
 
-	set_dload_mode(false);
+	set_dload_mode(download_mode &&
+			(in_panic || restart_mode == RESTART_DLOAD));
 #endif
 
 	if (qpnp_pon_check_hard_reset_stored()) {
