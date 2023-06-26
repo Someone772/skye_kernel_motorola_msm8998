@@ -1,4 +1,4 @@
-/* Copyright (c) 2014-2023, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2014-2019, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -2668,7 +2668,7 @@ static void tethering_stats_poll_queue(struct work_struct *work)
 
 	/* Schedule again only if there's an active polling interval */
 	if (0 != ipa3_rmnet_ctx.polling_interval)
-		queue_delayed_work(system_power_efficient_wq, &ipa_tether_stats_poll_wakequeue_work,
+		schedule_delayed_work(&ipa_tether_stats_poll_wakequeue_work,
 			msecs_to_jiffies(ipa3_rmnet_ctx.polling_interval*1000));
 }
 
@@ -2762,7 +2762,7 @@ int rmnet_ipa3_poll_tethering_stats(struct wan_ioctl_poll_tethering_stats *data)
 		return 0;
 	}
 
-	queue_delayed_work(system_power_efficient_wq, &ipa_tether_stats_poll_wakequeue_work, 0);
+	schedule_delayed_work(&ipa_tether_stats_poll_wakequeue_work, 0);
 	return 0;
 }
 
