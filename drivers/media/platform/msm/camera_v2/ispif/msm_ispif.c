@@ -1,4 +1,4 @@
-/* Copyright (c) 2013-2017, 2023 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2013-2017, 2019 The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -46,7 +46,7 @@
 #define ISPIF_INTF_CMD_DISABLE_IMMEDIATELY    0x02
 
 #define ISPIF_TIMEOUT_SLEEP_US                1000
-#define ISPIF_TIMEOUT_ALL_US              10000000
+#define ISPIF_TIMEOUT_ALL_US               1000000
 #define ISPIF_SOF_DEBUG_COUNT                    5
 
 /* 3D Threshold value according guidelines for line width 1280 */
