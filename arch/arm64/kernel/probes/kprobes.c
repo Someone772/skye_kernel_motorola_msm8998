@@ -194,14 +194,12 @@ spsr_set_debug_flag(struct pt_regs *regs, int mask)
  * interrupt occurrence in the period of exception return and  start of
  * out-of-line single-step, that result in wrongly single stepping
  * into the interrupt handler.
- * This also controls debug flag, so that we can refer the saved pstate.
  */
 static void __kprobes kprobes_save_local_irqflag(struct kprobe_ctlblk *kcb,
 						struct pt_regs *regs)
 {
 	kcb->saved_irqflag = regs->pstate;
 	regs->pstate |= PSR_I_BIT;
-	spsr_set_debug_flag(regs, 0);
 }
 
 static void __kprobes kprobes_restore_local_irqflag(struct kprobe_ctlblk *kcb,
@@ -211,10 +209,6 @@ static void __kprobes kprobes_restore_local_irqflag(struct kprobe_ctlblk *kcb,
 		regs->pstate |= PSR_I_BIT;
 	else
 		regs->pstate &= ~PSR_I_BIT;
-
-	/* Recover pstate.D mask if needed */
-	if (kcb->saved_irqflag & PSR_D_BIT)
-		spsr_set_debug_flag(regs, 1);
 }
 
 static void __kprobes
@@ -244,13 +238,17 @@ static void __kprobes setup_singlestep(struct kprobe *p,
 		kcb->kprobe_status = KPROBE_HIT_SS;
 	}
 
+
 	if (p->ainsn.api.insn) {
 		/* prepare for single stepping */
 		slot = (unsigned long)p->ainsn.api.insn;
 
 		set_ss_context(kcb, slot);	/* mark pending ss */
 
-		WARN_ON(regs->pstate & PSR_D_BIT);
+		if (kcb->kprobe_status == KPROBE_REENTER)
+			spsr_set_debug_flag(regs, 0);
+		else
+			WARN_ON(regs->pstate & PSR_D_BIT);
 
 		/* IRQs and single stepping do not mix well. */
 		kprobes_save_local_irqflag(kcb, regs);
