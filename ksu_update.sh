@@ -2,6 +2,8 @@
 
 echo pulling main branch of KernelSU
 
-git submodule update --recursive --remote
+cd kernelsu
+
+git pull origin main
 
 echo done
