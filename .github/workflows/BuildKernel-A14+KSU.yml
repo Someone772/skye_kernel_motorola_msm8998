@@ -1,4 +1,4 @@
-name: Build KernelSU
+name: Build Android Kernel 14 with KernelSU
 on:
   push:
     branches: ["Retrofit-A13-BoostKernel"]
