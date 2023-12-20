@@ -57,16 +57,12 @@ jobs:
           ref: master
           path: anykernel     
       
-       #- name: Setup KernelSU
-       #  working-directory: kernel-source
-       #  run: |
-       #     git config --global user.email "vimavick@gmail.com"
-       #     git config --global user.name "mrsiri"
-       #     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s main
-       #    
-       #     cd KernelSU
-       #     echo "KSU_VERSION=$(($(git rev-list --count HEAD) + 10200))" >> $GITHUB_ENV
-       #     cd -
+      - name: Update KernelSU
+        working-directory: kernel-source
+        run: |
+          cd KernelSU
+          git pull origin
+          cd -
 
 
 
