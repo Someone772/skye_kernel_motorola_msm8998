@@ -54,7 +54,7 @@ jobs:
         with:
           submodules: true
           repository: Aflaungos/AnyKernel3
-          ref: master
+          ref: Evert
           path: anykernel     
           
       - name: Setup Ccache
