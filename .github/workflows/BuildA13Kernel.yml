@@ -42,7 +42,7 @@ jobs:
         with:
           submodules: true
           repository: Aflaungos/android_kernel_motorola_msm8998
-          ref: thirteen
+          ref: Retrofit-A13-BoostKernel
           path: kernel-source
           
       - name: Checkout Anykernel
@@ -50,7 +50,7 @@ jobs:
         with:
           submodules: true
           repository: Aflaungos/AnyKernel3
-          ref: master
+          ref: Evert
           path: anykernel     
       
        #- name: Setup KernelSU
