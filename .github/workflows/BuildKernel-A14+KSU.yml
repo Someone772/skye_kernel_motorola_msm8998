@@ -90,7 +90,7 @@ jobs:
         working-directory: anykernel
         run: |
           cp -f $GITHUB_WORKSPACE/kernel-source/out/arch/arm64/boot/Image.gz-dtb .
-          ZIP_NAME="BoostKernel-KernelSUv${{ env.KSU_VERSION }}-${{ matrix.device }}"
+          ZIP_NAME="BoostKernel-KernelSU-${{ matrix.device }}"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
           zip -r "$ZIP_NAME.zip" *
           mv "$ZIP_NAME.zip" $GITHUB_WORKSPACE
@@ -103,9 +103,7 @@ jobs:
           
       - name: Creating Config Info
         run: |
-          echo "Device: Moto G6 Plus"
-          Device: ${{ matrix.device }}
-          Build Code: KernelSUv${{ env.KSU_VERSION }}-$(date +%Y%m%d)-${{ github.run_number }}
+          Build Code: $(date +%Y%m%d)-${{ github.run_number }}
           Only For Retrofit Roms (PixelExperience and Crdroid)
           " >> INFO.txt
       
