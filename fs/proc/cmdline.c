@@ -4,6 +4,8 @@
 #include <linux/seq_file.h>
 #include <asm/setup.h>
 
+static char new_command_line[COMMAND_LINE_SIZE];
+
 #if defined(CONFIG_INITRAMFS_IGNORE_SKIP_FLAG) || \
     defined(CONFIG_PROC_CMDLINE_APPEND_ANDROID_FORCE_NORMAL_BOOT)
 #define INITRAMFS_STR_FIND "skip_initramf"
