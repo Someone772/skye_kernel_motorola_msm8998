@@ -7,3 +7,5 @@ cd kernelsu
 git pull origin main
 
 echo done
+
+;; You may need to init the submodule before pulling
